@@ -1,3 +1,4 @@
+package AIM;
 import java.io.*;
 import java.util.*;
 
@@ -5,39 +6,38 @@ class FindShortestPath {
     static class AdjListNode {
         int vertex, weight;
 
-        AdjListNode(int v, int w)
-        {
+        AdjListNode(int v, int w) {
             vertex = v;
             weight = w;
         }
-        int getVertex() { return vertex; }
-        int getWeight() { return weight; }
+
+        int getVertex() {
+            return vertex;
+        }
+
+        int getWeight() {
+            return weight;
+        }
     }
 
-
     public static int[] dijkstra(
-            int V, ArrayList<ArrayList<AdjListNode> > graph,
-            int src)
-    {
+            int V, ArrayList<ArrayList<AdjListNode>> graph,
+            int src) {
         int[] distance = new int[V];
         for (int i = 0; i < V; i++)
             distance[i] = Integer.MAX_VALUE;
         distance[src] = 0;
 
-        PriorityQueue<AdjListNode> pq = new PriorityQueue<>(
-                (v1, v2) -> v1.getWeight() - v2.getWeight());
+        PriorityQueue<AdjListNode> pq = new PriorityQueue<>((v1, v2) -> v1.getWeight() - v2.getWeight());
         pq.add(new AdjListNode(src, 0));
 
         while (pq.size() > 0) {
             AdjListNode current = pq.poll();
 
-            for (AdjListNode n :
-                    graph.get(current.getVertex())) {
+            for (AdjListNode n : graph.get(current.getVertex())) {
                 if (distance[current.getVertex()]
-                        + n.getWeight()
-                        < distance[n.getVertex()]) {
-                    distance[n.getVertex()]
-                            = n.getWeight()
+                        + n.getWeight() < distance[n.getVertex()]) {
+                    distance[n.getVertex()] = n.getWeight()
                             + distance[current.getVertex()];
                     pq.add(new AdjListNode(
                             n.getVertex(),
@@ -49,11 +49,9 @@ class FindShortestPath {
         return distance;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         int V = 8;
-        ArrayList<ArrayList<AdjListNode> > graph
-                = new ArrayList<>();
+        ArrayList<ArrayList<AdjListNode>> graph = new ArrayList<>();
         for (int i = 0; i < V; i++) {
             graph.add(new ArrayList<>());
         }
@@ -75,11 +73,9 @@ class FindShortestPath {
 
         int[] distance = dijkstra(V, graph, source);
 
-        System.out.println(" Drop Points"
-                + " Minimum Distance (km)");
+        System.out.println(" Drop Points" + " Minimum Distance (km)");
         for (int i = 0; i < V; i++) {
-            System.out.println(i + "			 "
-                    + distance[i]);
+            System.out.println(i + " --- " + distance[i]);
         }
     }
 }

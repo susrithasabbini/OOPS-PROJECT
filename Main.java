@@ -1,3 +1,4 @@
+package AIM;
 import java.net.Authenticator;
 import java.sql.*;
 import java.util.*;
@@ -15,11 +16,35 @@ public class Main {
         Authentication A1 = new Authentication();
         Commando C1 = new Commando();
         Inventory I1 = new Inventory();
+        Diary D1 = new Diary();
+        FindShortestPath F1 = new FindShortestPath();
 
         BufferedReader d = new BufferedReader(new InputStreamReader(System.in));
         Scanner in = new Scanner(System.in);
+        System.out.println("\n" +
+                "                                                                                    \n" +
+                "                                                                                    \n" +
+                "               AAA                    IIIIIIIIII     MMMMMMMM               MMMMMMMM\n" +
+                "              A:::A                   I::::::::I     M:::::::M             M:::::::M\n" +
+                "             A:::::A                  I::::::::I     M::::::::M           M::::::::M\n" +
+                "            A:::::::A                 II::::::II     M:::::::::M         M:::::::::M\n" +
+                "           A:::::::::A                  I::::I       M::::::::::M       M::::::::::M\n" +
+                "          A:::::A:::::A                 I::::I       M:::::::::::M     M:::::::::::M\n" +
+                "         A:::::A A:::::A                I::::I       M:::::::M::::M   M::::M:::::::M\n" +
+                "        A:::::A   A:::::A               I::::I       M::::::M M::::M M::::M M::::::M\n" +
+                "       A:::::A     A:::::A              I::::I       M::::::M  M::::M::::M  M::::::M\n" +
+                "      A:::::AAAAAAAAA:::::A             I::::I       M::::::M   M:::::::M   M::::::M\n" +
+                "     A:::::::::::::::::::::A            I::::I       M::::::M    M:::::M    M::::::M\n" +
+                "    A:::::AAAAAAAAAAAAA:::::A           I::::I       M::::::M     MMMMM     M::::::M\n" +
+                "   A:::::A             A:::::A        II::::::II     M::::::M               M::::::M\n" +
+                "  A:::::A               A:::::A       I::::::::I     M::::::M               M::::::M\n" +
+                " A:::::A                 A:::::A      I::::::::I     M::::::M               M::::::M\n" +
+                "AAAAAAA                   AAAAAAA     IIIIIIIIII     MMMMMMMM               MMMMMMMM\n" +
+                "                                                                                    \n" +
+                "                                                                                    \n" +
+                "                                                                                    \n" +"");
 
-        System.out.printf("\n\n********************************* WELCOME TO AIR DROP MANAGEMENT SYSTEM ***********************************\n\n");
+        System.out.printf("********************************* WELCOME TO AIR DROP MANAGEMENT SYSTEM ***********************************\n\n");
 
         String name;
         String ID;
@@ -42,7 +67,7 @@ public class Main {
             int flag = 0;
             line();
             System.out.println(
-                    "Enter\n\t1.To Request Items\n\t2.To see Updated Tables\n\t3.Search Item\n\t4.Search by Quantity\n\t5.To send a message\n\t6.For exit");
+                    "Enter\n\t1.To Request Items\n\t2.To see Updated Tables\n\t3.Search Item\n\t4.Search by Quantity\n\t5.To send a message\n\t6.For Maps");
             System.out.print("Enter the number:- ");
 
             int a = in.nextInt();
@@ -286,6 +311,7 @@ public class Main {
 
         char runAgain = 'Y';
         basicmap enemy=new enemyhotspot();
+        basicmap ebase=new enemybase();
         basicmap safelocation=new safelocation();
         basicmap electricity=new electricpower();
         basicmap f=new fuel();
@@ -303,7 +329,7 @@ public class Main {
         do {
             int flag = 0;
             line();
-            System.out.println("Enter\n\t1.Enemy Basis\n\t2.Safe Locations\n\t3.Electricity\n\t4.Fuel\n\t5.Water\n\t6.For exit");
+            System.out.println("Enter\n\t1.Enemy Hotspot\n\t2.Safe Locations\n\t3.Electricity\n\t4.Fuel\n\t5.Water\n\t6.Package\n\t7.Attacking Enemies\n\t8.Diary\n\t9.Enemy Base\n\t10.For exit");
             System.out.print("Enter the number:- ");
 
             int select = in.nextInt();
@@ -367,7 +393,7 @@ public class Main {
                             break;
                         }
                         case 4: {
-                            l=safelocation.nearestlocation(troop);
+                            l = safelocation.nearestlocation(troop);
                             l.printlocation();
                             break;
                         }
@@ -385,7 +411,7 @@ public class Main {
                         case 1: {
                             System.out.print("Enter radius:- ");
                             int r = in.nextInt();
-                            electricity.setlocation(troop,r);
+                            electricity.setlocation(troop, r);
                             electricity.printmap();
                             break;
                         }
@@ -398,7 +424,7 @@ public class Main {
                             break;
                         }
                         case 4: {
-                            l=electricity.nearestlocation(troop);
+                            l = electricity.nearestlocation(troop);
                             l.printlocation();
                             break;
                         }
@@ -416,7 +442,7 @@ public class Main {
                         case 1: {
                             System.out.print("Enter radius:- ");
                             int r = in.nextInt();
-                            f.setlocation(troop,r);
+                            f.setlocation(troop, r);
                             f.printmap();
                             break;
                         }
@@ -429,7 +455,7 @@ public class Main {
                             break;
                         }
                         case 4: {
-                            l=f.nearestlocation(troop);
+                            l = f.nearestlocation(troop);
                             l.printlocation();
                             break;
                         }
@@ -447,7 +473,7 @@ public class Main {
                         case 1: {
                             System.out.print("Enter radius:- ");
                             int r = in.nextInt();
-                            water.setlocation(troop,r);
+                            water.setlocation(troop, r);
                             water.printmap();
                             break;
                         }
@@ -460,7 +486,7 @@ public class Main {
                             break;
                         }
                         case 4: {
-                            l=water.nearestlocation(troop);
+                            l = water.nearestlocation(troop);
                             l.printlocation();
                             break;
                         }
@@ -470,6 +496,137 @@ public class Main {
                     break;
                 }
                 case 6: {
+                    adp.airdroptt(troop);
+                    break;
+                }
+
+                case 7: {
+                    line();
+                    System.out.println("Enter\n\t1.Air Strike\n\t2.Get Distance From Home Base\n\t3.Get the shortest distances from Main base and safe locations");
+                    System.out.print("Enter the number:- ");
+                    int opt = in.nextInt();
+                    switch (opt) {
+                        case 1: {
+                            Bombs B1 = new Bombs();
+                            System.out.println("Enter latitude and longitude of the new / old enemy location:- ");
+                            elati = in.nextInt();
+                            elongi = in.nextInt();
+                            System.out.println("Enter radius:- ");
+                            radius = in.nextInt();
+                            l = new location(elati, elongi);
+                            enemy.removelocation(l, radius);
+                            B1.getBomb(radius);
+                            break;
+                        }
+                        case 2: {
+                            Resque R1 = new Resque();
+                            System.out.println("Enter the Co-Ordinates:-");
+                            System.out.print("Enter the X-Co_ord:- ");
+                            int X = in.nextInt();
+                            System.out.print("Enter the Y-Co_ord:- ");
+                            int Y = in.nextInt();
+                            R1.getDistance(X, Y);
+                            break;
+                        }
+                        case 3: {
+
+                            System.out.println("The distance's between the BASE and Safe Locations:-");
+                            int V = 8;
+                            ArrayList<ArrayList<FindShortestPath.AdjListNode>> graph
+                                    = new ArrayList<>();
+                            for (int i = 0; i < V; i++) {
+                                graph.add(new ArrayList<>());
+                            }
+                            int source = 0;
+                            graph.get(0).add(new FindShortestPath.AdjListNode(1, 40));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(2, 35));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(3, 26));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(4, 15));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(5, 21));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(6, 31));
+                            graph.get(0).add(new FindShortestPath.AdjListNode(7, 19));
+                            graph.get(1).add(new FindShortestPath.AdjListNode(4, 44));
+                            graph.get(1).add(new FindShortestPath.AdjListNode(6, 67));
+                            graph.get(2).add(new FindShortestPath.AdjListNode(6, 58));
+                            graph.get(2).add(new FindShortestPath.AdjListNode(5, 48));
+                            graph.get(3).add(new FindShortestPath.AdjListNode(5, 39));
+                            graph.get(3).add(new FindShortestPath.AdjListNode(7, 37));
+                            graph.get(4).add(new FindShortestPath.AdjListNode(7, 18));
+
+                            int[] distance = F1.dijkstra(V, graph, source);
+
+                            System.out.println(" Drop Points"
+                                    + " Minimum Distance (km)");
+                            for (int i = 0; i < V; i++) {
+                                System.out.println(i + "			 "
+                                        + distance[i]);
+                            }
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    break;
+                }
+
+                case 8: {
+                    System.out.println("Enter\n\t1.To Enter in the diary\n\t2.To View Diary");
+                    System.out.print("Enter the number:- ");
+                    int choice = in.nextInt();
+                    switch (choice) {
+                        case 1: {
+                            System.out.println("Write the contents in the Diary:");
+                            D1.DiaryNote();
+                            break;
+                        }
+
+                        case 2: {
+                            D1.getDiary();
+                            break;
+                        }
+                        default:
+                            break;
+
+                    }
+                    break;
+                }
+
+                case 9: {
+                    line();
+                    System.out.println("Enter\n\t1.Update Enemy Location\n\t2.Print Map\n\t3.Local Map\n\t4.Find Nearest Location");
+                    System.out.print("Enter the number:- ");
+                    int opt = in.nextInt();
+                    switch (opt) {
+                        case 1: {
+                            System.out.println("Enter latitude and longitude of the enemy location:- ");
+                            elati = in.nextInt();
+                            elongi = in.nextInt();
+                            System.out.println("Enter radius:- ");
+                            radius = in.nextInt();
+                            l = new location(elati, elongi);
+                            ebase.setlocation(l, radius);
+                            ebase.printmap();
+                            break;
+                        }
+                        case 2: {
+                            ebase.printmap();
+                            break;
+                        }
+                        case 3: {
+                            ebase.localmap(l);
+                            break;
+                        }
+                        case 4: {
+                            l = ebase.nearestlocation(troop);
+                            l.printlocation();
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    break;
+                }
+                case 10: {
                     flag = 1;
                     runAgain = 'N';
                     break;
@@ -482,56 +639,5 @@ public class Main {
 
         }while (runAgain == 'Y' || runAgain == 'y');
 
-        adp.airdroptt(troop);
-
-//        safelocation.setlocation(troop,1);
-//        safelocation.printmap();
-//        safelocation.localmap(troop);
-//        l=safelocation.nearestlocation(troop);
-//        l.printlocation();
-//
-//        electricity.setlocation(troop,3);
-//        electricity.printmap();
-//        electricity.localmap(troop);
-//        l=electricity.nearestlocation(troop);
-//        l.printlocation();
-//
-//        f.setlocation(troop,3);
-//        f.printmap();
-//        f.localmap(troop);
-//        l=f.nearestlocation(troop);
-//        l.printlocation();
-//
-//        // f.setlocation(troop,3);
-//        // f.printmap();
-//        // f.localmap(troop);
-//        // l=f.nearestlocation(troop);
-//        // l.printlocation();
-//
-//        water.setlocation(troop,3);
-//        water.printmap();
-//        water.localmap(troop);
-//        l=water.nearestlocation(troop);
-//        l.printlocation();
-//
-//        basicmap enemybase=new enemybase();
-//        enemybase.printmap();
-//        l=enemybase.nearestlocation(troop);
-//        l.printlocation();
-
-//        adp.airdroptt(troop);
-
-        /*
-            location object saves the location (latitude,longitude) (0<=latitude<50,0<=longitude<100)
-            latitude is |
-            longitude is ---
-            for all the map objects
-            .printmap() prints the map
-            .localmap(location l) prints the objects local map of the given location
-            .nearestlocation(location troop) returns nearest object of the respective class
-            airdrop
-            .setlocation(location l) sets the give objects map value at location to 1
-            airdropclassobject.airdroptt(location troop) prints the location and time of delivery
-        */
     }
 }
